@@ -74,3 +74,24 @@ type IdentityFunc<T> = MapFunc<T, T>;
 #### 부분 적용 함수
 
 자신의 함수 호출 연산자 보다 적게 호출하는 경우를 부분 적용 함수라고 한다.
+
+### 클로저
+
+고차함수 몸통 내에서 선언되는 함수를 의미함, 지속적인 유효 범위를 뜻함
+
+```typescript
+function add(x: number): (number) => number => { // 바깥유효 범위
+    return function(y: number): number => {      // 안쪽유효 범위 시작
+        return x + y                             // 클로저
+    }                                            // 안쪽유효 범위 끝
+}                                                // 바깥유효 범위 끝
+```
+
+1. 상단 예시에서 `x`는 내부범위 에서만 보면 의미를 알 수 없는 변수이다. 이를 자유 변수(free variable)라고 한다.
+
+클로저가 지속적 유효 범위를 의미하는 이유
+
+```typescript
+const add1 = add(1); // 메모리 변수 유지
+const result = add1(2); // result에 결과 값을 넘겨주고 변수 x 메모리 해제
+```
