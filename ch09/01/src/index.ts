@@ -10,3 +10,12 @@ R.pipe(
 		console.log(array);
 	})
 )(array);
+
+const numbers: number[] = R.range(1, 10);
+
+const incNumbers = R.pipe(
+	R.map(R.inc),
+	R.tap((a) => console.log(`after inc: ${a}`))
+);
+
+const newNumbers = incNumbers(numbers);
